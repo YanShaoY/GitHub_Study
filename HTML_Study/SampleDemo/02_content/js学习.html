@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>YanSY的JavaScript学习之路</title>
+</head>
+
+<body>
+    <div style="margin:20px 10px 10px 30px; border: 1px solid black; box-shadow: 5px 5px 5px gray">
+        <h2 style="margin:20px 10px 10px 30px">一、这里是为了搜索字符串，采用Search方法</h2>
+        <button onclick="myFunctionSearch()" style="margin: 10px auto 20px 100px">点我搜索</button>
+        <p id="demoSearch" style="margin: 10px 10px 20px 100px"> </p>
+        <script>
+            function myFunctionSearch() {
+                var str = "asjdkfjakdjgkajljdlkjsdjgalkjsdlkggsjdropewurkdjfaskljfkaj";
+                var n = str.search("lkj");
+                document.getElementById("demoSearch").innerHTML = n;
+            }
+
+        </script>
+    </div>
+
+    <div style="margin:20px 10px 10px 30px; border: 1px solid black; box-shadow: 5px 5px 5px gray ">
+        <h2 style="margin:20px 10px 10px 30px">二、这里是替换字符串，采用Replace方法</h2>
+        <p style="margin:20px 10px 10px 50px">替换 "microsoft" 为 "W3cSchool" :</p>
+        <button onclick="myFunctionReplace()" style="margin: 10px auto 20px 100px">点我替换</button>
+        <p id="demoReplace" style="margin: 10px 10px 20px 100px">请访问 Microsoft!</p>
+        <script>
+            function myFunctionReplace() {
+                var str = document.getElementById("demoReplace").innerHTML;
+                var txt = str.replace(/microsoft/i, "W3cSchool");
+                document.getElementById("demoReplace").innerHTML = txt;
+            }
+
+        </script>
+    </div>
+
+    <div style="margin: 20px 10px 10px 30px; border: 1px solid black;box-shadow: 5px 5px 5px gray">
+        <h2 style="margin: 20px 10px 10px 30px">三、这里是错误的抛出及简单处理方式 try catch</h2>
+
+        <input type="button" value="点击查看消息" onclick="message()" style="margin: 10px 10px 40px 50px">
+
+        <script>
+            var txt = "";
+
+            function message() {
+                try {
+                    addalert("这是个错误信息");
+                } catch (err) {
+                    txt = "本页有一个错误!!\n\n";
+                    txt += "错误描述：" + err.message + "\n\n";
+                    txt += "点击确定继续。\n\n";
+                    alert(txt);
+                }
+            }
+
+        </script>
+    </div>
+
+    <div style="margin: 20px 10px 10px 30px;border: 1px solid black;box-shadow: 5px 5px 5px gray">
+        <h2 style="margin: 20px 10px 10px 30px">四、这里是错误的主动抛出及处理 throw</h2>
+        <p style="margin: 10px 10px 10px 40px">请输入一个5到10之间的数字:</p>
+        <input id="throwDemo" type="text" style="margin: auto auto 10px 40px">
+        <button type="button" onclick="throwFunction()" style="margin: auto auto auto 20px">测试输入</button>
+        <p id="mess" style="margin: 20px auto 20px 40px"></p>
+        <script>
+            function throwFunction() {
+                try {
+                    var x = document.getElementById("throwDemo").value;
+                    if (x == "") throw "值为空";
+                    if (isNaN(x)) throw "不是数字";
+                    if (x > 10) throw "太大";
+                    if (x < 5) throw "太小";
+                    if (5 < x < 10) throw "刚刚好";
+                } catch (err) {
+                    var y = document.getElementById("mess");
+                    y.innerHTML = "提示：" + err + "。";
+                }
+            }
+
+        </script>
+    </div>
+
+    <div style="margin: 20px 10px 10px 30px;border: 1px solid black;box-shadow: 5px 5px 5px gray">
+        <h2 style="margin: 20px 10px 10px 30px">五、这里是表单验证 from</h2>
+
+        <form name="myForm" onsubmit="return validateForm()" style="margin: 40px">姓:
+            <input type="text" name="fname">
+            <input type="submit" value="提交">
+
+        </form>
+        <script>
+            function validateForm() {
+                var x = document.forms["myForm"]["fname"].value;
+                if (x == null || x == "") {
+                    alert("姓必须填写");
+                    return false;
+                } else {
+                    alert("还可以");
+                    return true;
+                }
+            }
+
+        </script>
+    </div>
+
+    <div style="margin: 20px 10px 10px 30px;border: 1px solid black;box-shadow: 5px 5px 5px gray">
+        <h2 style="margin: 20px 10px 10px 30px">六、这里是json示例</h2>
+        <h4 style="margin: auto auto 20px 30px">为json字符串创建对象</h4>
+        <p id="jsonDemo" style="margin: auto auto 20px 30px;color: gold">这里是显示json数据的标签</p>
+
+        <button style="margin: auto auto 10px 50px;color: blue" onclick="jsonFunction()">点击按钮</button>
+
+        <script>
+            function jsonFunction() {
+                var text = '{"employees":[' +
+                    '{"firstName":"John","lastName":"Doe" },' +
+                    '{"firstName":"Anna","lastName":"Smith" },' +
+                    '{"firstName":"Peter","lastName":"Jones" }]}';
+                obj = JSON.parse(text);
+                document.getElementById("jsonDemo").innerHTML = obj.employees[1].firstName + " " + obj.employees[1].lastName;
+            }
+
+        </script>
+
+
+    </div>
+
+
+
+
+    <div style="margin:20px 10px 10px 30px; border: 1px solid black; box-shadow: 5px 5px 5px gray;">
+
+        <h2 style="margin:20px 10px 10px 30px">七、这里是javascript:void(0) 含义</h2>
+        <h4 style="margin: auto auto 20px 30px">第一个示例：什么都不处理</h4>
+        <a style="margin: auto 10px 10px 30px;color: green" href="javascript:void(0)">单此处什么也不会发生</a>
+
+        <h4 style="margin: 10px 20px 20px 30px">第二个示例：弹出警告弹窗</h4>
+        <p style="margin: 10px 20px 10px 30px;">点击以下链接查看结果：</p>
+        <a style="margin: 10px 20px 30px 100px;color: green" href="javascript:void(alert('Warning!!!'))">点我</a>
+
+    </div>
+
+    <div style="margin:20px 10px 10px 30px; border: 1px solid black; box-shadow: 5px 5px 5px gray;">
+
+        <p>函数可以存储在变量中:</p>
+        <p id="demoqwer"></p>
+        <script>
+            var x = function(a, b) {
+                return a * b
+            };
+            var y = x(12, 2);
+            document.getElementById("demoqwer").innerHTML = y;
+
+        </script>
+
+    </div>
+
+     <div style="margin:20px 10px 500px 30px; ">
+     
+      <article>
+          
+          <h1>这是一个article示例</h1>
+          <p>这是一个水果，可以吃。而且非常好吃</p>
+          
+          <section>
+              <h2>红富士</h2>
+              <p>这是一种外表很红的苹果，吃起来也不错</p>
+          </section>    
+    
+          <section>
+              <h3>哎哟喂我去</h3>
+              <p>这是一种外表很红的苹果，吃起来也不错</p>
+          </section>
+          
+          
+      </article>
+       
+       
+       <section>
+           <h2>foot</h2>
+           <article>
+               <h3>pingguo</h3>
+               <p>内容</p>
+           </article>
+       </section>
+        
+        
+        
+         </div>
+
+
+
+    <div style="margin:20px 10px 500px 30px; "> </div>
+
+</body>
+
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

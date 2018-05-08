@@ -1,0 +1,8 @@
+@charset "utf-8";
+
+.content {
+    padding-left: 1000px;
+    margin-right: auto;
+    height: 10%;
+    transition: all .4s;
+}
